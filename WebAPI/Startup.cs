@@ -1,14 +1,19 @@
-﻿using Application.Interfaces.Repositories;
+﻿using Application.Configuration;
+using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Interfaces.UnitOfWork;
 using Application.Validators;
 using AutoMapper;
+using Domain.Entities;
 using FluentValidation.AspNetCore;
 using Infrastructure;
 using Infrastructure.Mapping;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +53,7 @@ namespace WebAPI
                 options.SuppressModelStateInvalidFilter = true;//framework'ün kendi model filter'ını baskıladık
             });
 
+            services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));
 
             //AutoMapper
             var mapperConfig = new MapperConfiguration(mc =>
@@ -66,6 +72,72 @@ namespace WebAPI
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddAutoMapper(typeof(MapProfile)); //map eklemesi
+
+
+            /* 
+             JWT API 
+             */
+            //DI Register
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped(typeof(IGenericRepositories<>), typeof(GenericRepositories<>));
+            services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"), sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly("Persistence");//migraton oluşturulacak yer
+                });
+            });
+
+            services.AddIdentity<UserApp, UserAppRole>(Opt =>
+            {
+                Opt.User.RequireUniqueEmail = true;
+                Opt.Password.RequireNonAlphanumeric = false;
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
+
+
+
+
+            services.AddAuthentication(options =>
+            {
+                //bir üyelik sisteminde kullanıcı olarak gir bayi olarak gir gibi özellikler burada scheme olarak adlandırılır.
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
+            {
+                var tokenOptions = Configuration.GetSection("TokenOption").Get<CustomTokenOption>();//mapleme işlemi yaptık
+                opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {//validasyonu burada gerçekleştireceğiz.
+                    ValidIssuer = tokenOptions.Issuer, //www.autserver.com
+                    ValidAudience = tokenOptions.Audience[0],//www.authserver.com,www.miniapi1.com
+                    IssuerSigningKey = Infrastructure.Services.SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
+
+
+                    ValidateIssuerSigningKey = true,//mutlaka bir imzası olması zorundadır.
+                    ValidateAudience = true,//doğrulama
+                    ValidateIssuer = true, //doğrula
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,//default eklenen vakti 0'a çeker. Tölerans değerini 0'a indirdim.
+                };
+            });
+
+
+            services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));
+
+            services.Configure<List<Client>>(Configuration.GetSection("Clients"));
+
+            /* 
+             JWT API
+             */
 
 
             services.AddControllers();
@@ -92,8 +164,12 @@ namespace WebAPI
 
             app.UseRouting();
 
-
             app.UseCustomException();//middleware ekledik.
+
+            //ekleme
+            app.UseAuthentication();
+
+
 
             app.UseAuthorization();
 

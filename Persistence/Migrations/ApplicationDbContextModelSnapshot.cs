@@ -19,18 +19,6 @@ namespace Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Domain.Entities.Admin", b =>
-                {
-                    b.Property<int>("AdminID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("AdminID");
-
-                    b.ToTable("Admins");
-                });
-
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryID")
@@ -39,12 +27,14 @@ namespace Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedKey")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DeletedKey")
@@ -54,12 +44,14 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDeleted")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UpdatedKey")
@@ -81,12 +73,14 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedKey")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DeletedKey")
@@ -99,12 +93,14 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("IsDeleted")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UpdatedKey")
@@ -151,12 +147,14 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedKey")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DeletedKey")
@@ -166,12 +164,14 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDeleted")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UpdatedKey")
@@ -332,7 +332,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skills")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("SurName")
                         .HasColumnType("nvarchar(max)");
@@ -382,6 +383,29 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "c603e2b8-b1ff-4148-8d42-9b66d179a00a",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "6924454e-b844-4a6f-ac72-b22fed06bcbc",
+                            Name = "TeamLead",
+                            NormalizedName = "TEAMLEAD"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "188caa35-7f64-44bd-9393-c26b92e4f862",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserFavoriteLesson", b =>

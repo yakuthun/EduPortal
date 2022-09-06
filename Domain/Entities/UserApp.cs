@@ -14,5 +14,6 @@ namespace Domain.Entities
         public string SurName { get; set; }
         public string Skills { get; set; }
         public string Picture { get; set; }
+
     }
 }

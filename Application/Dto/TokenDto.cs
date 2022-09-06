@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.Dto
 {
-    // Sadece AccessToken ve AccessToken ömrünü tutan bir property olacak.
-    public class ClientTokenDto
+    public class TokenDto
     {
         public string AccessToken { get; set; }
         public DateTime AccessTokenExpiration { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiration { get; set; }
     }
 }

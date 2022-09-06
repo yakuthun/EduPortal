@@ -9,15 +9,16 @@ namespace Domain.Entities
 {
     public class FollowBaseEntity
     {
-        public DateTime? UpdatedDate { get; set; }
+        [Required]
+        public DateTime UpdatedDate { get; set; }
+        [Required]
         public int UpdatedKey{ get; set; }
-
-        public DateTime? CreatedDate { get; set; }
+        [Required]
+        public DateTime CreatedDate { get; set; }
+        [Required]
         public int CreatedKey { get; set; }
-
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedDate { get; set; }
-        public int DeletedKey { get; set; }
-
+        public int? DeletedKey { get; set; }
     }
 }
