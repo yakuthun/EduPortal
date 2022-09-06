@@ -18,6 +18,8 @@ namespace Infrastructure.Mapping
             CreateMap<UserAppDto, UserApp>().ReverseMap();
             CreateMap<UserAppRoleDto, UserAppRole>().ReverseMap();
             CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<LessonDto, Lesson>().ReverseMap();
+            CreateMap<CourseDto, Course>().ReverseMap();
         }
     }
 }

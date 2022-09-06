@@ -11,6 +11,8 @@ namespace Infrastructure.Mapping
             CreateMap<EducationDTO, Education>().ReverseMap();
             CreateMap<UserAppDto, UserApp>().ReverseMap();
             CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<LessonDto, Lesson>().ReverseMap();
+            CreateMap<CourseDto, Course>().ReverseMap();
         }
     }
 }
