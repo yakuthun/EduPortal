@@ -29,9 +29,7 @@ namespace Persistence.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<UserLesson> UserLessons{ get; set; }
         public DbSet<UserFavoriteLesson> UserFavoriteLessons{ get; set; }
-        //public DbSet<Admin> Admins{ get; set; }
-        public DbSet<TeamLead> TeamLeads{ get; set; }
-        public DbSet<Student> Students{ get; set; }
+    
         public DbSet<Notification> Notifications{ get; set; }
         public DbSet<UserRefreshToken> UserRefreshTokens{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
