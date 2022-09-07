@@ -11,16 +11,31 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CourseController : CustmBaseController
     {
-        private readonly IGenericService<Course, CourseDto> _genericService;
+        private readonly IGenericService<Course, CourseDto> _courseService;
 
         public CourseController(IGenericService<Course, CourseDto> genericService)
         {
-            _genericService = genericService;
+            _courseService = genericService;
         }
         [HttpGet]
         public async Task<IActionResult> GetCourse()
         {
-            return ActionResultInstance(await _genericService.GetAllAsync());
+            return ActionResultInstance(await _courseService.GetAllAsync());
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveProduct(CourseDto courseDto)
+        {
+            return ActionResultInstance(await _courseService.AddAsync(courseDto));
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct(CourseDto courseDto)
+        {
+            return ActionResultInstance(await _courseService.Update(courseDto, courseDto.CourseID));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            return ActionResultInstance(await _courseService.Remove(id));
         }
     }
 }

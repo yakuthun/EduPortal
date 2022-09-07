@@ -9,6 +9,8 @@ namespace Application.Dto
     public class CreateUserDto
     {//client yeni bir kullanıcı oluşturmak istediğinde
         public string UserName { get; set; }
+        public string Name { get; set; }
+        public string SurName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 

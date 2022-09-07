@@ -30,6 +30,7 @@ namespace Infrastructure.Services
             _unitOfWork = unitOfWork;
             _userRefreshTokenService = userRefreshTokenService;
         }
+
         public async Task<Response<TokenDto>> CreateTokenAsync(LoginDto loginDto)
         {
             if (loginDto == null) throw new ArgumentNullException(nameof(loginDto));

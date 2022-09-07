@@ -1,8 +1,12 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Services;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -12,9 +16,11 @@ namespace WebAPI.Controllers
     public class UserController : CustmBaseController
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly UserManager<UserApp> _userManager;
+        public UserController(IUserService userService, UserManager<UserApp> userManager)
         {
             _userService = userService;
+            _userManager = userManager;
         }
         //api/user
         [HttpPost]
@@ -29,5 +35,31 @@ namespace WebAPI.Controllers
         {
             return ActionResultInstance(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
         }
+        [Authorize]
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UpdateUserDto updateUserDto)
+        {
+            var usrName = HttpContext.User.Identity.Name;
+           // var user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+           // UserApp userEntity = new UserApp();
+           // user.Name = updateUserDto.Name;
+           // user.SurName = updateUserDto.SurName;
+           //var result = await _userManager.UpdateAsync(user);
+
+           // if (result.Succeeded)
+           // {
+           //     return Ok();
+           // }
+           // else
+           // {
+           //     return BadRequest();
+           // }
+            //var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            //var userId = userIdClaim.Value;
+            return ActionResultInstance(await _userService.UpdateUserAsync(updateUserDto,usrName));
+        }
+
+
     }
 }

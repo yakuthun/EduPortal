@@ -16,12 +16,6 @@ namespace Domain.Entities
         public string Description { get; set; }
         public DateTime EndDate { get; set; }
 
-        //public DateTime? CreatedDate { get; set; }
-        //public DateTime? UpdatedDate { get; set; }
-
-
-        //public bool? IsDeleted { get; set; } 
-        //public DateTime? DeletedDate { get; set; }
 
         public virtual Category Category { get; set; }
         public ICollection<Lesson> Lessons { get; set; }

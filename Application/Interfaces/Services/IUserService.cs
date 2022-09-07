@@ -11,5 +11,7 @@ namespace Application.Interfaces.Services
     {//burası direkt olarak Presentation Layer(API) ile haberleşecek
         Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto userDto);
         Task<Response<UserAppDto>> GetUserByNameAsync(string userName);//user bilgilerini alacak
+        Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto,string userName);
+        Task<Response<UserAppDto>> DeleteUserAsync(UserAppDto userDto);
     }
 }
