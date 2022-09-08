@@ -11,6 +11,10 @@ namespace Application.Dto
         public string Id { get; set; }
         public string UserName { get; set; }//identity user'daki verileri döneceğiz
         public string Email { get; set; }
-        public string City { get; set; }
+        public string Name { get; set; }
+        public string SurName { get; set; }
+        //public string Password { get; set; }
+        public string Picture { get; set; }
+        public string Skills { get; set; }
     }
 }

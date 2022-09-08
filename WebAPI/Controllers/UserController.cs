@@ -40,26 +40,11 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateUser(UpdateUserDto updateUserDto)
         {
-            var usrName = HttpContext.User.Identity.Name;
-           // var user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-           // UserApp userEntity = new UserApp();
-           // user.Name = updateUserDto.Name;
-           // user.SurName = updateUserDto.SurName;
-           //var result = await _userManager.UpdateAsync(user);
+          
 
-           // if (result.Succeeded)
-           // {
-           //     return Ok();
-           // }
-           // else
-           // {
-           //     return BadRequest();
-           // }
-            //var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            //var userId = userIdClaim.Value;
-            return ActionResultInstance(await _userService.UpdateUserAsync(updateUserDto,usrName));
+           return ActionResultInstance(await _userService.UpdateUserAsync(updateUserDto, HttpContext.User.Identity.Name));
+        
         }
-
-
+       
     }
 }

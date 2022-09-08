@@ -13,6 +13,7 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string SurName { get; set; }
         public bool isTeamLead { get; set; }
+        public bool IsActive { get; set; }
         public string Skills { get; set; }
         public string Picture { get; set; }
 

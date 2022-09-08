@@ -24,17 +24,17 @@ namespace WebAPI.Controllers
             return ActionResultInstance(await _lessonService.GetAllAsync());
         }
         [HttpPost]
-        public async Task<IActionResult> SaveProduct(LessonDto lessonDto)
+        public async Task<IActionResult> SaveLesson(LessonDto lessonDto)
         {
             return ActionResultInstance(await _lessonService.AddAsync(lessonDto));
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(LessonDto lessonDto)
+        public async Task<IActionResult> UpdateLesson(LessonDto lessonDto)
         {
             return ActionResultInstance(await _lessonService.Update(lessonDto, lessonDto.LessonID));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteLesson(int id)
         {
             return ActionResultInstance(await _lessonService.Remove(id));
         }

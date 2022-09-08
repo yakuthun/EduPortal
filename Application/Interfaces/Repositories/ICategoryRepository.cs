@@ -9,6 +9,6 @@ namespace Application.Interfaces.Repositories
 {
     public interface ICategoryRepository:IGenericRepositories<Category>
     {
-        Task AddAsync(Category entity);
+        Task<Category> AddCategoryAsync(Category entity);
     }
 }

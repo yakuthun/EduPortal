@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces.Services
+namespace Application.Dto
 {
-    public interface CategoryService
+    public class UserDeleteDto
     {
+        public string IsActive { get; set; }
     }
 }

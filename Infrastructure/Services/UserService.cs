@@ -48,8 +48,10 @@ namespace Infrastructure.Services
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
         }
 
-        public Task<Response<UserAppDto>> DeleteUserAsync(UserAppDto userDto)
+        public async Task<Response<UserAppDto>> DeleteUserAsync(UserDeleteDto userDto)
         {
+            
+           
             throw new NotImplementedException();
         }
 
@@ -65,6 +67,7 @@ namespace Infrastructure.Services
 
         public async Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto,string userName)
         {
+
             var users = await _userManager.FindByNameAsync(userName);
             if (users == null)
             {
@@ -81,17 +84,10 @@ namespace Infrastructure.Services
                 };
 
 
-                var result = await _userManager.UpdateAsync(user);
-
-
-                if (!result.Succeeded)
-                {
-                    var errors = result.Errors.Select(x => x.Description).ToList();//username already taken gibi hatalar dönecek
-                    return Response<UserAppDto>.Fail(new ErrorDto(errors, true), 400);
-                }
+                await _userManager.UpdateAsync(user);
                 return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
             }
-          
+
 
 
         }

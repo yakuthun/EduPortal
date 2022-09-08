@@ -14,6 +14,7 @@ namespace Infrastructure.Mapping
             CreateMap<LessonDto, Lesson>().ReverseMap();
             CreateMap<CourseDto, Course>().ReverseMap();
             CreateMap<UpdateUserDto, UserApp>().ReverseMap();
+            CreateMap<UserDeleteDto, UserApp>().ReverseMap();
 
         }
     }
