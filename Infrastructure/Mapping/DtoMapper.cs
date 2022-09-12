@@ -18,6 +18,7 @@ namespace Infrastructure.Mapping
             CreateMap<CategoryFollowDto, Category>().ReverseMap();
             CreateMap<UpdateCategoryDto, Category>().ReverseMap();
             CreateMap<NotificationDto, Notification>().ReverseMap();
+            CreateMap<CourseAssignDto, CourseAssign>().ReverseMap();
         }
     }
 }

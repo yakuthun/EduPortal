@@ -55,6 +55,11 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Response<IEnumerable<UserAppDto>>> GetAllUserAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Response<UserAppDto>> GetUserByNameAsync(string userName)
         {//username ile beraber yeni bir user döneceğiz.
             var user = await _userManager.FindByNameAsync(userName);

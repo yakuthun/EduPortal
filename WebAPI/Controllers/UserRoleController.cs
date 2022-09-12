@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserRoleController : ControllerBase
     {
         private readonly UserManager<UserApp> _userManager;
@@ -29,11 +29,9 @@ namespace WebAPI.Controllers
         //public async Task<IActionResult> RoleAssign(string id)
         //{
         //    UserApp user = await _userManager.FindByIdAsync(id);
-          
-
         //    return NoContent();
         //}
-        [HttpPut]
+        [HttpPost("{id}")]
         public async Task<ActionResult> RoleAssign(List<RoleAssignViewModel> modelList, string id)
         {
             UserApp user = await _userManager.FindByIdAsync(id);

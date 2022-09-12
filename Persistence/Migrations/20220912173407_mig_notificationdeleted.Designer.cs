@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220912173407_mig_notificationdeleted")]
+    partial class mig_notificationdeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,56 +107,6 @@ namespace Persistence.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Domain.Entities.CourseAssign", b =>
-                {
-                    b.Property<int>("CourseAssignID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AssignKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFinish")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TeamLeadKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CourseAssignID");
-
-                    b.HasIndex("CourseID");
-
-                    b.ToTable("CourseAssigns");
-                });
-
             modelBuilder.Entity("Domain.Entities.Education", b =>
                 {
                     b.Property<int>("Id")
@@ -240,13 +192,18 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CreatedKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserKey")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("NotificationID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Notifications");
                 });
@@ -401,21 +358,21 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "77a30c45-6c77-4234-95ab-7ee6e300634f",
+                            ConcurrencyStamp = "b76e9cc7-4805-4cba-9220-3d03e4279cca",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "afcf810b-fb6c-4b5a-a90d-01f44b34b31d",
+                            ConcurrencyStamp = "a1e6045b-4d03-4b0e-942e-8d46e8b1a006",
                             Name = "TeamLead",
                             NormalizedName = "TEAMLEAD"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "91ef5b24-e579-4e81-9b06-05b2ccece818",
+                            ConcurrencyStamp = "97a50a84-0524-447f-ad07-ecef964de866",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -616,15 +573,6 @@ namespace Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Entities.CourseAssign", b =>
-                {
-                    b.HasOne("Domain.Entities.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseID");
-
-                    b.Navigation("Course");
-                });
-
             modelBuilder.Entity("Domain.Entities.Lesson", b =>
                 {
                     b.HasOne("Domain.Entities.Course", "Course")
@@ -638,6 +586,17 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserID");
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Notification", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserFavoriteLesson", b =>

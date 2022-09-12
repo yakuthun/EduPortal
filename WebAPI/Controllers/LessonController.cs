@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
 
         private readonly IGenericService<Lesson, LessonDto> _lessonService;
         private readonly IGenericService<Notification, NotificationDto> _notificationService;
-
+        //NotificationDto notification = new NotificationDto();
         public LessonController(IGenericService<Lesson, LessonDto> genericService, IGenericService<Notification, NotificationDto> notificationService)
         {
             _lessonService = genericService;
@@ -40,9 +40,11 @@ namespace WebAPI.Controllers
             lessonDto.CreatedKey = userIdClaim.Value;
             lessonDto.UpdatedKey = userIdClaim.Value;
             lessonDto.IsDeleted = false;
-            //NotificationDto not = new NotificationDto();
-            //not.Message = "xx";
-            //await _notificationService.AddAsync(not);
+
+            //notification.Message = "test";
+            //notification.CreatedDate = DateTime.Now;
+            //notification.UserKey=userIdClaim.Value;
+            //await _notificationService.AddAsync(notification);
             //lessonDto.UpdatedKey = HttpContext.User.Identity.Name;
             return ActionResultInstance(await _lessonService.AddAsync(lessonDto));
         }

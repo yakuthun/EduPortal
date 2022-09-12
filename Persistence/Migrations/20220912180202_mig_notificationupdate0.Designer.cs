@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220912180202_mig_notificationupdate0")]
+    partial class mig_notificationupdate0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,56 +105,6 @@ namespace Persistence.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CourseAssign", b =>
-                {
-                    b.Property<int>("CourseAssignID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AssignKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFinish")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TeamLeadKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CourseAssignID");
-
-                    b.HasIndex("CourseID");
-
-                    b.ToTable("CourseAssigns");
                 });
 
             modelBuilder.Entity("Domain.Entities.Education", b =>
@@ -401,21 +353,21 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "77a30c45-6c77-4234-95ab-7ee6e300634f",
+                            ConcurrencyStamp = "3d8b76ca-75a0-45b9-9a04-7a288677bb75",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "afcf810b-fb6c-4b5a-a90d-01f44b34b31d",
+                            ConcurrencyStamp = "4b7197ac-440a-4379-9914-c3c83939cbd3",
                             Name = "TeamLead",
                             NormalizedName = "TEAMLEAD"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "91ef5b24-e579-4e81-9b06-05b2ccece818",
+                            ConcurrencyStamp = "2fa960eb-e96e-4c96-aeff-19b3b2e8cfcb",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -614,15 +566,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("CategoryID");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CourseAssign", b =>
-                {
-                    b.HasOne("Domain.Entities.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseID");
-
-                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Domain.Entities.Lesson", b =>

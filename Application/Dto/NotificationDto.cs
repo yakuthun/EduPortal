@@ -13,7 +13,7 @@ namespace Application.Dto
         public string Message { get; set; }
         public DateTime? CreatedDate { get; set; }
         //[Required]
-        public string? CreatedKey { get; set; }
+        public string? UserKey { get; set; }
 
     }
 }

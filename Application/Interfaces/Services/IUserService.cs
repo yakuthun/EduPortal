@@ -13,5 +13,7 @@ namespace Application.Interfaces.Services
         Task<Response<UserAppDto>> GetUserByNameAsync(string userName);//user bilgilerini alacak
         Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto,string userName);
         Task<Response<UserAppDto>> DeleteUserAsync(UserDeleteDto userDto);
+        Task<Response<IEnumerable<UserAppDto>>> GetAllUserAsync();//user bilgilerini alacak
+        
     }
 }

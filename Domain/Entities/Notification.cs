@@ -14,8 +14,8 @@ namespace Domain.Entities
         public string Message { get; set; }
         public DateTime? CreatedDate { get; set; }
         //[Required]
-        public string? CreatedKey { get; set; }
-        public int UserID { get; set; }
-        public virtual User User { get; set; }
+        public string? UserKey { get; set; }
+        //public int UserID { get; set; }
+        //public virtual User User { get; set; }
     }
 }
