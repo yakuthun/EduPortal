@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Application.Dto
 {
-    public class LessonDto : CategoryFollowDto
+    public class UpdateCategoryDto
     {
-        public int LessonID { get; set; }
+        public int CategoryID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string VideoUrl { get; set; }
-
-        public int? CourseID { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        //[Required]
+        public string? UpdatedKey { get; set; }
     }
 }

@@ -14,8 +14,7 @@ namespace Domain.Entities
         public int CategoryID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        //public DateTime? UpdatedDate { get; set; }
-        //[DefaultValue(false)]
+
         public ICollection<Course> Courses { get; set; }
     }
 }

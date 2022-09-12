@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.Dto
 {
-    public class CategoryDto
+    public class CategoryFollowDto
     {
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
         public DateTime? UpdatedDate { get; set; }
         //[Required]
-        public string? UpdatedKey{ get; set; }
+        public string? UpdatedKey { get; set; }
         //[Required]
         public DateTime? CreatedDate { get; set; }
         //[Required]
@@ -21,6 +18,5 @@ namespace Application.Dto
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedDate { get; set; }
         public string? DeletedKey { get; set; }
-
     }
 }

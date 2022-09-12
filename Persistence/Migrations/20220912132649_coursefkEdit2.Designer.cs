@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220912132649_coursefkEdit2")]
+    partial class coursefkEdit2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,12 +189,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedKey")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
@@ -356,21 +352,21 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "a89df805-502c-4f22-955c-6a9b729695f5",
+                            ConcurrencyStamp = "f6aa3557-65a9-468b-a2bc-8a87d336cfbe",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "788aa1bf-bf27-4846-b7ff-da0b067d10c0",
+                            ConcurrencyStamp = "6a427dbc-2f05-4145-9260-9c02899e9e7a",
                             Name = "TeamLead",
                             NormalizedName = "TEAMLEAD"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "7677bb37-d746-4469-b582-1ab2e195cadb",
+                            ConcurrencyStamp = "327446c7-3653-438b-8722-c9dcdbe0b8e0",
                             Name = "User",
                             NormalizedName = "USER"
                         });

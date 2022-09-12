@@ -15,9 +15,9 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime EndDate { get; set; }
-
-
-        public virtual Category Category { get; set; }
+        public int? CategoryID { get; set; }
+        public  Category Category { get; set; }
+        //public virtual Category Category { get; set; }
         public ICollection<Lesson> Lessons { get; set; }
    
     }

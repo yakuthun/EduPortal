@@ -20,9 +20,9 @@ namespace Persistence.Repositories
             _dbSet = context.Set<Category>(); 
         }
 
-        public Task<Category> AddCategoryAsync(Category entity)
+        public async Task AddCategoryAsync(Category entity)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddAsync(entity);
         }
     }
 }

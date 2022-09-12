@@ -19,6 +19,7 @@ namespace Application.Interfaces.Repositories
         Task AddAsync(TEntity entity);
         void Remove(TEntity entity);
         TEntity Update(TEntity entity);
+        TEntity SoftDelete(TEntity entity);
         //_context.Entry(entity).state=EntityState.Modified
     }
 }

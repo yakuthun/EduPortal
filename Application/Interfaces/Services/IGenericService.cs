@@ -17,5 +17,6 @@ namespace Application.Interfaces.Services
         Task<Response<TDto>> AddAsync(TDto entity);
         Task<Response<NoContentDto>> Remove(int id);
         Task<Response<NoContentDto>> Update(TDto entity, int id);
+        Task<Response<NoContentDto>> SoftDelete(TDto entity, int id);
     }
 }

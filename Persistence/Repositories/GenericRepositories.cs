@@ -56,5 +56,10 @@ namespace Persistence.Repositories
         {
             return _dbSet.Where(predicate);
         }
+        public Tentity SoftDelete(Tentity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            return entity;
+        }
     }
 }

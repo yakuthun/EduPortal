@@ -85,6 +85,8 @@ namespace WebAPI
             services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            //services.AddScoped(typeof(ICategoryService<,>), typeof(CategoryService));
+            //services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
