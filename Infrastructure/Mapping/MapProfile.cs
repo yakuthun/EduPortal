@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Mapping
 {
+    //aktif
     public class MapProfile:Profile
     {
         public MapProfile()

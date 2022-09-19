@@ -40,11 +40,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateUser(UpdateUserDto updateUserDto)
         {
-          
-
            return ActionResultInstance(await _userService.UpdateUserAsync(updateUserDto, HttpContext.User.Identity.Name));
-        
         }
-       
     }
 }

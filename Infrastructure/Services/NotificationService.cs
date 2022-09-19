@@ -2,7 +2,9 @@
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Interfaces.UnitOfWork;
+using AutoMapper.Internal.Mappers;
 using Domain.Entities;
+using Infrastructure.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,44 +14,27 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class NotificationService:INotificationService
+    public class NotificationService: INotificationService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly INotificationRepository _notificationRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public Task<Response<NotificationDto>> AddAsync(NotificationDto entity)
+        public NotificationService(IUnitOfWork unitOfWork, INotificationRepository notificationRepository)
         {
-            throw new NotImplementedException();
+            _unitOfWork = unitOfWork;
+            _notificationRepository = notificationRepository;
         }
 
-        public Task<Response<IEnumerable<NotificationDto>>> GetAllAsync()
+        public async Task<Response<NotificationDto>> AddNotificationAsync(string message,string userkey)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<NotificationDto>> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<NoContentDto>> Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<NoContentDto>> SoftDelete(NotificationDto entity, int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<NoContentDto>> Update(NotificationDto entity, int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<IEnumerable<NotificationDto>>> Where(Expression<Func<Notification, bool>> predicate)
-        {
-            throw new NotImplementedException();
+            NotificationDto entity = new NotificationDto();
+            var newEntity = ObjectMapper.Mapper.Map<Notification>(entity);
+            newEntity.Message = message;
+            newEntity.UserKey = userkey;
+            newEntity.CreatedDate = DateTime.Now;
+            await _notificationRepository.AddNotificationAsync(newEntity);
+            await _unitOfWork.CommitAsync();
+            return Response<NotificationDto>.Success(200);
         }
     }
 }

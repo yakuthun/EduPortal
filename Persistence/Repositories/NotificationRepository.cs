@@ -13,53 +13,18 @@ namespace Persistence.Repositories
 {
     public class NotificationRepository : INotificationRepository
     {
-        protected readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly DbSet<Notification> _dbSet;
-
-        public NotificationRepository(ApplicationDbContext context, DbSet<Notification> dbSet)
+        public NotificationRepository(ApplicationDbContext context)
         {
             _context = context;
-            _dbSet = dbSet;
+            _dbSet = context.Set<Notification>();
         }
 
-        public Task AddAsync(Notification entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task AddNotificationAsync(Notification entity)
         {
             await _dbSet.AddAsync(entity);
-        }
-
-        public Task<IEnumerable<Notification>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Notification> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Notification entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Notification SoftDelete(Notification entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Notification Update(Notification entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Notification> Where(Expression<Func<Notification, bool>> predicate)
-        {
-            throw new NotImplementedException();
         }
     }
 }

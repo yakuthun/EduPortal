@@ -18,7 +18,6 @@ namespace Infrastructure.Services
         private readonly UserManager<UserApp> _userManager;
         private readonly IUnitOfWork _unitOfWork;
 
-
         public UserService(UserManager<UserApp> userManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
@@ -50,8 +49,6 @@ namespace Infrastructure.Services
 
         public async Task<Response<UserAppDto>> DeleteUserAsync(UserDeleteDto userDto)
         {
-            
-           
             throw new NotImplementedException();
         }
 
@@ -72,28 +69,30 @@ namespace Infrastructure.Services
 
         public async Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto,string userName)
         {
-
             var users = await _userManager.FindByNameAsync(userName);
+
             if (users == null)
             {
                 return Response<UserAppDto>.Fail("UserName not found", 404, true);
             }
             else
             {
-                var user = new UserApp
-                {
-                    Name = userDto.Name,
-                    SurName = userDto.SurName,
-                    Picture = userDto.Picture,
-                    Skills = userDto.Skills
-                };
+                //var user = new UserApp
+                //{
+                //    Name = userDto.Name,
+                //    SurName = userDto.SurName,
+                //    Picture = userDto.Picture,
+                //    Skills = userDto.Skills
+                //};
 
+                users.Name = userDto.Name;
+                users.SurName = userDto.SurName;
+                users.Skills = userDto.Skills;
+                users.Picture = userDto.Picture;
 
-                await _userManager.UpdateAsync(user);
-                return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
+                await _userManager.UpdateAsync(users);
+                return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(users), 200);
             }
-
-
 
         }
     }

@@ -54,5 +54,32 @@ namespace WebAPI.Controllers
             }
             return NoContent();
         }
+
+
+
+        //[HttpPost("{id}")]
+        //public async Task<ActionResult> AuthenticateUser(List<RoleAssignViewModel> modelList, string id)
+        //{
+        //    UserApp user = await _userManager.FindByIdAsync(id);
+        //    List<UserAppRole> allRoles = _roleManager.Roles.ToList();
+        //    List<string> userRoles = await _userManager.GetRolesAsync(user) as List<string>;
+        //    List<RoleAssignViewModel> assignRoles = new List<RoleAssignViewModel>();
+        //    allRoles.ForEach(role => assignRoles.Add(new RoleAssignViewModel
+        //    {
+        //        Exist = userRoles.Contains(role.Name),
+        //        RoleId = role.Id,
+        //        RoleName = role.Name
+        //    }));
+
+        //    foreach (RoleAssignViewModel role in modelList)
+        //    {
+        //        if (role.Exist)
+        //            await _userManager.AddToRoleAsync(user, role.RoleName);
+        //        else
+        //            await _userManager.RemoveFromRoleAsync(user, role.RoleName);
+        //    }
+        //    return NoContent();
+        //}
+     
     }
 }

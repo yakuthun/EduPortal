@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿    using Application.Dto;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -18,27 +18,27 @@ namespace WebAPI.Controllers
     public class CourseAssignController : CustmBaseController
     {
         private readonly IGenericService<CourseAssign, CourseAssignDto> _assignService;
-        private readonly IGenericService<Notification, NotificationDto> _notificationService;
-        NotificationDto notification = new NotificationDto();
-        public CourseAssignController(IGenericService<CourseAssign, CourseAssignDto> assignService, IGenericService<Notification, NotificationDto> notificationService)
+        private readonly INotificationService _notification;
+        public CourseAssignController(IGenericService<CourseAssign, CourseAssignDto> assignService,INotificationService notification)
         {
             _assignService = assignService;
-            _notificationService = notificationService;
+            _notification = notification;
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveLesson(CourseAssignDto courseAssignDto)
+        public async Task<IActionResult> CourseAssign(CourseAssignDto courseAssignDto)
         {
-            var userName = HttpContext.User.Identity.Name;//bu name üzerinden veri tabanında istediğimiz kullanıcıya ait bilgi alabiliriz.
-            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            courseAssignDto.TeamLeadKey = userIdClaim.Value;
-
-            notification.Message = "A new course has been assigned to you";
-            notification.CreatedDate = DateTime.Now;
-            notification.UserKey= courseAssignDto.AssignKey;
-            await _notificationService.AddAsync(notification);
-            //lessonDto.UpdatedKey = HttpContext.User.Identity.Name;
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            //courseAssignDto.TeamLeadKey = userIdClaim.Value;
+            await _notification.AddNotificationAsync("A new course has been assigned to you",courseAssignDto.AssignKey);
             return ActionResultInstance(await _assignService.AddAsync(courseAssignDto));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> CourseAssignUpdate(CourseAssignDto course)
+        {
+            await _notification.AddNotificationAsync("Team Lead Change", course.AssignKey);
+            return ActionResultInstance(await _assignService.Update(course,course.CourseAssignID));
         }
     }
 }

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Services
 {
-    public interface INotificationService:IGenericService<Notification, NotificationDto>
-    {
-        Task<Response<NotificationDto>> AddAsync(NotificationDto entity);
+    public interface INotificationService
+    {//verilerin girişi
+        Task<Response<NotificationDto>> AddNotificationAsync(string message,string userkey);
     }
 }

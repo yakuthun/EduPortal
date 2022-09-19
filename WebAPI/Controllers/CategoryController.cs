@@ -11,21 +11,24 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : CustmBaseController
     {
         private readonly IGenericService<Category,CategoryDto> _categoryservice;
         private readonly ICategoryService<Category,CategoryDto> _categoryx;
-        //private readonly ICategoryService<Category,CategoryDto> _testCategoryService;
-        public CategoryController(IGenericService<Category, CategoryDto> genericService)
+        private readonly INotificationService _notification;
+        public CategoryController(IGenericService<Category, CategoryDto> genericService, INotificationService notification)
         {
             _categoryservice = genericService;
+            _notification = notification;
         }
         [HttpGet]
         public async Task<IActionResult> GetCategory()
         {
+            NotificationDto dto = new NotificationDto();
+            await _notification.AddNotificationAsync("Get Category List0","KEYVALUE");
             return ActionResultInstance(await _categoryservice.GetAllAsync());
         }
         [HttpPost]
@@ -73,6 +76,5 @@ namespace WebAPI.Controllers
         {
             return ActionResultInstance(await _categoryservice.GetByIdAsync(id));
         }
-
     }
 }

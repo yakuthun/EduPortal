@@ -71,6 +71,10 @@ namespace WebAPI
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(INotificationRepository), typeof(NotificationRepository));
+            services.AddScoped(typeof(INotificationService), typeof(NotificationService));
+            //services.AddScoped(typeof(ICourseAssignRepository), typeof(CourseAssignRepository));
+            //services.AddScoped(typeof(ICourseAssignService), typeof(CourseAssignService));
             //services.AddAutoMapper(typeof(MapProfile)); //map eklemesi
 
 

@@ -4,6 +4,7 @@ using Domain.Entities;
 
 namespace Infrastructure.Mapping
 {
+    //pasif
     public class DtoMapper : Profile
     {
         public DtoMapper()

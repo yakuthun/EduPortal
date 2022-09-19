@@ -76,6 +76,5 @@ namespace WebAPI.Controllers
         {
             return ActionResultInstance(await _courseService.GetByIdAsync(id));
         }
-
     }
 }

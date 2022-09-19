@@ -31,6 +31,7 @@ namespace Infrastructure.Services
             //ent.CreatedDate = DateTime.Now;
             await _genericRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
+            
             var newDto = ObjectMapper.Mapper.Map<TDto>(newEntity);
             return Response<TDto>.Success(newDto, 200);
         }
