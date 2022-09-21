@@ -19,6 +19,7 @@ namespace Persistence.Repositories
             _context = context;
             _dbSet = context.Set<Tentity>(); //Set dbset'e karşılık gelir.
         }
+
         public async Task AddAsync(Tentity entity)
         {
             await _dbSet.AddAsync(entity);
@@ -56,6 +57,7 @@ namespace Persistence.Repositories
         {
             return _dbSet.Where(predicate);
         }
+
         public Tentity SoftDelete(Tentity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;

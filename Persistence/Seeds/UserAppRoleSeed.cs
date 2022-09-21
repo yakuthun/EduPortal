@@ -17,7 +17,6 @@ namespace Persistence.Seeds
                 new UserAppRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
                 new UserAppRole { Id = "2", Name = "TeamLead", NormalizedName = "TEAMLEAD" },
                 new UserAppRole { Id = "3", Name = "User", NormalizedName = "USER" }
-
                 );
         }
     }

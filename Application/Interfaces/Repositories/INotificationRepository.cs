@@ -10,5 +10,7 @@ namespace Application.Interfaces.Repositories
     public interface INotificationRepository
     {
         Task AddNotificationAsync(Notification entity);
+        Task<Notification> GetNotification(string id);
+        Task<IEnumerable<Notification>> GetNotifications();
     }
 }

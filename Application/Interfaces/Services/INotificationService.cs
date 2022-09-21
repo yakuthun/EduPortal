@@ -11,5 +11,7 @@ namespace Application.Interfaces.Services
     public interface INotificationService
     {//verilerin girişi
         Task<Response<NotificationDto>> AddNotificationAsync(string message,string userkey);
+        Task<Response<NotificationDto>> GetNotification(string id);
+        Task<Response<IEnumerable<NotificationDto>>> GetNotifications();
     }
 }

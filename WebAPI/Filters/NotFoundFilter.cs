@@ -4,7 +4,11 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 using System.Threading.Tasks;
+/*
+  clientten gelen bir id geldiği zaman direk dönüyoruz. Ama dönmeden önce bu id veritabanına var yok mu kontrol etmemiz lazım. 
+idye sahip ürünleri kontrol ederken NotFoundFilter kullanılmalı.DI ile geldiği için ServiceFilter olarak almış bulunuyoruz.
 
+ */
 namespace WebAPI.Filters
 {
     public class NotFoundFilter<T> : IAsyncActionFilter where T : BaseEntity

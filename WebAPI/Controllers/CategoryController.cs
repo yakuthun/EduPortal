@@ -17,7 +17,6 @@ namespace WebAPI.Controllers
     public class CategoryController : CustmBaseController
     {
         private readonly IGenericService<Category,CategoryDto> _categoryservice;
-        private readonly ICategoryService<Category,CategoryDto> _categoryx;
         private readonly INotificationService _notification;
         public CategoryController(IGenericService<Category, CategoryDto> genericService, INotificationService notification)
         {
@@ -27,21 +26,13 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCategory()
         {
-            NotificationDto dto = new NotificationDto();
-            await _notification.AddNotificationAsync("Get Category List0","KEYVALUE");
+            await _notification.AddNotificationAsync("Get Category List", HttpContext.User.Identity.Name);
             return ActionResultInstance(await _categoryservice.GetAllAsync());
         }
         [HttpPost]
         public async Task<IActionResult> SaveCategory(CategoryDto categoryDto)
         {
-            var userName = HttpContext.User.Identity.Name;//bu name üzerinden veri tabanında istediğimiz kullanıcıya ait bilgi alabiliriz.
-            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            //veritabanında userId veya userName alanları üzerinden gerekli dataları çek.
-            categoryDto.CreatedDate = DateTime.Now;
-            categoryDto.UpdatedDate = DateTime.Now;
-            categoryDto.CreatedKey= userIdClaim.Value;
-            categoryDto.UpdatedKey = userIdClaim.Value;
-            categoryDto.IsDeleted = false;
+          await _notification.AddNotificationAsync("Get Category List", HttpContext.User.Identity.Name);
             
             //categoryDto.UpdatedKey = HttpContext.User.Identity.Name;
             return ActionResultInstance(await _categoryservice.AddAsync(categoryDto));

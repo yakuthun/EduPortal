@@ -36,5 +36,20 @@ namespace Infrastructure.Services
             await _unitOfWork.CommitAsync();
             return Response<NotificationDto>.Success(200);
         }
+
+        public async Task<Response<NotificationDto>> GetNotification(string id)
+        {
+            var notification = await _notificationRepository.GetNotification(id);
+            if (notification == null)
+            {
+                return Response<NotificationDto>.Fail("Id not found", 404, true);
+            }
+            return Response<NotificationDto>.Success(ObjectMapper.Mapper.Map<NotificationDto>(notification), 200);
+        }
+
+        public Task<Response<IEnumerable<NotificationDto>>> GetNotifications()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

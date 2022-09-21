@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly IUnitOfWork _unitOfWork;
@@ -36,7 +36,7 @@ namespace Infrastructure.Services
                 SurName = createUserDto.SurName
             };
 
-            
+
             var result = await _userManager.CreateAsync(user, createUserDto.Password);
 
             if (!result.Succeeded)
@@ -67,7 +67,7 @@ namespace Infrastructure.Services
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
         }
 
-        public async Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto,string userName)
+        public async Task<Response<UserAppDto>> UpdateUserAsync(UpdateUserDto userDto, string userName)
         {
             var users = await _userManager.FindByNameAsync(userName);
 
@@ -91,9 +91,12 @@ namespace Infrastructure.Services
                 users.Picture = userDto.Picture;
 
                 await _userManager.UpdateAsync(users);
-                return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(users), 200);
-            }
 
+
+                return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(users), 200);
+                //}
+
+            }
         }
     }
 }
